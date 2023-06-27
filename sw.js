@@ -3,29 +3,35 @@ let isOnline = true; //will get updated via messaging
 const staticCache = `pwaEx3StaticCache${version}`;
 const dynamicCache = `pwaEx3DynamicCache${version}`;
 const cacheList = [
-  '/',
-  '/index.html',
-  '/about.html',
-  '/css/style.css',
-  '/css/plugin.css',
-  '/css/color.css',
-  '/js/app.js',
-  '/js/jquery.min.js',
-  '/js/plugins.js',
-  '/js/scripts.js',
-  '/manifest.json',
-  '/img/android-chrome-192x192.png',
-  '/img/android-chrome-512x512.png',
-  '/img/apple-touch-icon.png',
-  '/img/favicon-16x16.png',
-  '/img/favicon-32x32.png',
-  '/img/mstile-150x150.png',
-    
+  "/",
+  "/index.html",
+  "/about.html",
+  "/css/style.css",
+  "/css/plugin.css",
+  "/css/color.css",
+  "https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200;300;400;500;600;700;800&amp;family=Oswald:wght@500;700&amp;family=Roboto:wght@500&amp;display=swap",
+  "/js/app.js",
+  "/js/jquery.min.js",
+  "/js/plugins.js",
+  "/js/scripts.js",
+  "/manifest.json",
+  "/img/android-chrome-192x192.png",
+  "/img/android-chrome-512x512.png",
+  "/img/apple-touch-icon.png",
+  "/img/favicon-16x16.png",
+  "/img/favicon-32x32.png",
+  "/img/mstile-150x150.png",
+  "https://unpkg.com/react@experimental/umd/react.development.js",
+  "https://unpkg.com/react-dom@experimental/umd/react-dom.development.js",
+  "https://unpkg.com/history@latest/umd/history.development.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/react-router/6.0.2/react-router.development.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.0.2/react-router-dom.development.js",
+
   //TODO: if you add any other JS files include them here
 ];
 
 //TODO: complete the functions for these events
-self.addEventListener('install', (ev) => {
+self.addEventListener("install", (ev) => {
   ev.waitUntil(
     caches.open(staticCache).then((cache) => {
       //save the whole cacheList
@@ -34,7 +40,7 @@ self.addEventListener('install', (ev) => {
   );
 });
 
-self.addEventListener('activate', (ev) => {
+self.addEventListener("activate", (ev) => {
   ev.waitUntil(
     caches
       .keys()
@@ -55,7 +61,7 @@ self.addEventListener('activate', (ev) => {
   );
 });
 
-self.addEventListener('fetch', (ev) => {
+self.addEventListener("fetch", (ev) => {
   //TODO:
   //update the script here to look in the caches first
   //if not in the cache check if online
@@ -79,11 +85,11 @@ self.addEventListener('fetch', (ev) => {
             });
           })
           .catch((err) => {
-            console.log('SW fetch failed');
+            console.log("SW fetch failed");
             console.warn(err);
-            if (ev.request.mode == 'navigate') {
+            if (ev.request.mode == "navigate") {
               //send the 404 page
-              return caches.match('/404.html').then((page404Response) => {
+              return caches.match("/404.html").then((page404Response) => {
                 return page404Response;
               });
             }
@@ -103,7 +109,7 @@ self.addEventListener('fetch', (ev) => {
   ); //what do we want to send to the browser?
 });
 
-self.addEventListener('message', (ev) => {
+self.addEventListener("message", (ev) => {
   console.log(ev.data);
   //message received from script
   if (ev.data.ONLINE) {

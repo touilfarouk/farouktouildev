@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Recorder with Instant Playback and Reverb</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+  <div data-role="page">
+    <div data-role="header">
+      <h1>Audio Recorder with Instant Playback and Reverb</h1>
+    </div>
+    <div role="main" class="ui-content">
+      <input type="range" id="reverb-slider" min="0" max="100" value="50">
+      <input type="range" id="depth-slider" min="0" max="100" value="50">
+      <input type="range" id="eq-slider" min="-12" max="12" value="0" step="0.5">
+      <button id="record-button">Record</button>
+    </div>
+  </div>
+
+  <script src="http://reverbjs.org/reverb.js"></script>
+  <script>
+    var audioContext;
+    var reverbNode;
+    var depthNode;
+    var eqNode;
+    var recordedChunks = [];
+    var mediaRecorder;
+
+    $(document).on("pagecreate", function() {
+      function initializeAudio() {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        reverbjs.extend(audioContext);
+
+        var reverbUrl = "http://reverbjs.org/Library/TerrysFactoryWarehouse.m4a";
+        reverbNode = audioContext.createReverbFromUrl(reverbUrl, function() {
+          reverbNode.connect(audioContext.destination);
+        });
+
+        depthNode = audioContext.createGain();
+        eqNode = audioContext.createBiquadFilter();
+        eqNode.type = "peaking";
+        eqNode.frequency.value = 1000;
+        eqNode.gain.value = 0;
+      }
+
+      function adjustReverbMix(value) {
+        if (reverbNode) {
+          reverbNode.wet.value = value / 100; // Adjust the wet/dry mix based on the input value
+        }
+      }
+
+      function adjustDepth(value) {
+        if (depthNode) {
+          depthNode.gain.value = value / 100; // Adjust the depth based on the input value
+        }
+      }
+
+      function adjustEqualizer(value) {
+        if (eqNode) {
+          eqNode.gain.value = value; // Adjust the equalizer based on the input value
+        }
+      }
+
+      function startRecording() {
+        if (!audioContext) {
+          initializeAudio();
+        }
+
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(function(stream) {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.start();
+
+            mediaRecorder.addEventListener("dataavailable", function(event) {
+              recordedChunks.push(event.data);
+            });
+          })
+          .catch(function(error) {
+            console.error("Error accessing microphone:", error);
+          });
+      }
+
+      function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+          mediaRecorder.stop();
+
+          mediaRecorder.addEventListener("stop", function() {
+            var blob = new Blob(recordedChunks, { type: "audio/webm" });
+            var audioURL = URL.createObjectURL(blob);
+
+            var audioElement = document.createElement("audio");
+            audioElement.controls = true;
+            audioElement.src = audioURL;
+            document.body.appendChild(audioElement);
+
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+              var arrayBuffer = fileReader.result;
+              audioContext.decodeAudioData(arrayBuffer, function(buffer) {
+                var sourceNode = audioContext.createBufferSource();
+                sourceNode.buffer = buffer;
+
+                // Connect the source node to the effect nodes
+                sourceNode.connect(reverbNode);
+                sourceNode.connect(depthNode);
+                sourceNode.connect(eqNode);
+
+                // Connect the effect nodes to the audio output
+                reverbNode.connect(audioContext.destination);
+                depthNode.connect(audioContext.destination);
+                eqNode.connect(audioContext.destination);
+
+                // Start playing the recorded audio with effects
+                sourceNode.start();
+              });
+            };
+            fileReader.readAsArrayBuffer(blob);
+          });
+
+          recordedChunks = [];
+        }
+      }
+
+      $("#reverb-slider").on("change", function() {
+        adjustReverbMix(this.value);
+      });
+
+      $("#depth-slider").on("change", function() {
+        adjustDepth(this.value);
+      });
+
+      $("#eq-slider").on("change", function() {
+        adjustEqualizer(this.value);
+      });
+
+      $("#record-button").on("vmousedown", function() {
+        startRecording();
+      });
+
+      $("#record-button").on("vmouseup", function() {
+        stopRecording();
+      });
+    });
+  </script>
+</body>
+</html>
