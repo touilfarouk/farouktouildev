@@ -21,7 +21,7 @@ const Header = () => {
           </li>
           <li>
             <span>02. Write </span>
-            <a href="mailto:theside@domain.com">zonar@domain.com</a>
+            <a href="mailto:theside@domain.com">codacom@domain.com</a>
           </li>
         </ul>
         <a href="contacts.html" className="ajax contacts-btn">

@@ -1,298 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Audio recorder</title>
-  <style>
-    #recorder {
-      position: relative;
-      width: 15rem;
-      height: 3rem;
-      border-radius: 3rem;
-      background: #38383d;
-      border: 1px solid #f9f9fa33;
-      cursor: pointer;
-      box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.15);
-      transition: 0.2s ease;
-    }
-
-    #recorder #record {
-      width: 60%;
-      height: 60%;
-      top: 20%;
-      left: 20%;
-      position: absolute;
-      transition: inherit;
-    }
-
-    #recorder #arrow {
-      width: 50%;
-      height: 50%;
-      top: 30%;
-      left: 25%;
-      position: absolute;
-      transition: inherit;
-      opacity: 0;
-    }
-
-    #recorder:active {
-      border-color: transparent;
-    }
-
-    #recorder:active #record {
-      width: 55%;
-      height: 55%;
-      top: 23%;
-      left: 23%;
-    }
-
-    #recorder.recording {
-      box-shadow: 0 0 0 1px #45a1ff, 0 0 0 4px rgba(69, 161, 255, 0.3);
-    }
-
-    #recorder.recording #record {
-      animation: recording 0.7s ease infinite;
-    }
-
-    #recorder.download #record {
-      height: 40%;
-      width: 40%;
-      top: 15%;
-      left: 30%;
-      animation: none;
-    }
-
-    #recorder.download #arrow {
-      animation: download 0.5s ease infinite;
-    }
-
-    #recorder.out #record {
-      animation: out 0.8s ease, in 0.2s 0.8s ease;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #3e3c3c;
-    }
-    
-    #recorder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 200px;
-      height: 200px;
-      background-color: #38383d;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      margin-bottom: 1rem;
-    }
-    
-    #recorder img {
-      max-width: 100%;
-      max-height: 100%;
-    }
-    
-    .controls {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 1rem;
-    }
-    
-    .control {
-      margin-bottom: 0.5rem;
-    }
-    
-    .control-label {
-      font-size: 0.8rem;
-      color: #fff;
-    }
-    
-    .control-slider {
-      width: 100%;
-    }
-    
-    @media (max-width: 600px) {
-      #recorder {
-        width: 10rem;
-        height: 2rem;
-      }
-    
-      #recorder #record {
-        width: 50%;
-        height: 50%;
-        top: 25%;
-        left: 25%;
-      }
-    
-      #recorder #arrow {
-        width: 40%;
-        height: 40%;
-        top: 30%;
-        left: 30%;
-      }
-    }
-    
-    @keyframes in {
-      from {
-        height: 0%;
-        top: 60%;
-      }
-    }
-    
-    @keyframes recording {
-      from, to {
-        transform: rotate(10deg);
-      }
-      50% {
-        transform: rotate(-10deg);
-      }
-    }
-    
-    @keyframes download {
-      0% {
-        top: 30%;
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        top: 55%;
-        opacity: 0;
-      }
-    }
-    
-    @keyframes out {
-      20% {
-        top: 8%;
-      }
-      75%, 100% {
-        top: 100%;
-        opacity: 0;
-        height: 0px;
-      }
-    }
-  </style>
+  <title>Voice Recorder with Church Hall Reverb</title>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div id="recorder">
-  <img id="record" src="https://bassets.github.io/record.svg"/>
-  <img id="arrow" src="https://bassets.github.io/arrow.svg"/>
-</div>
-<!-- partial -->
+  <div data-role="page">
+    <div data-role="header">
+      <h1>Voice Recorder with Church Hall Reverb</h1>
+    </div>
+    <div role="main" class="ui-content">
+      <button id="record-button">Record</button>
+      <button id="play-button">Play</button>
+      <button id="stop-button">Stop</button>
+    </div>
+  </div>
 
-<div class="controls">
-  <div class="control">
-    <label for="reverb" class="control-label">Reverb</label>
-    <input class="control-slider" type="range" id="reverb" min="0" max="10" step="0.1" value="3">
-  </div>
-  <div class="control">
-    <label for="chorus" class="control-label">Chorus Depth</label>
-    <input class="control-slider" type="range" id="chorus" min="0" max="10" step="0.1" value="4">
-  </div>
-  <div class="control">
-    <label for="volume" class="control-label">Volume</label>
-    <input class="control-slider" type="range" id="volume" min="0" max="100" step="1" value="50">
-  </div>
-</div>
+  <script src="https://reverbjs.org/reverb.js"></script>
+  <script>
+    var audioContext;
+    var sourceNode;
+    var reverbNode;
+    var recordedChunks = [];
+    var mediaRecorder;
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-<script>
-  const recordAudio = () =>
-    new Promise(async (resolve) => {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      const audioChunks = [];
-      mediaRecorder.addEventListener("dataavailable", (event) => {
-        audioChunks.push(event.data);
+    $(document).on("pagecreate", function() {
+      function initializeAudio() {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        reverbjs.extend(audioContext);
+
+        var reverbUrl = "https://reverbjs.org/Library/MaesHowe.m4a";
+        reverbNode = audioContext.createReverbFromUrl(reverbUrl, function() {
+          reverbNode.connect(audioContext.destination);
+        });
+      }
+
+      // ...
+
+      $("#record-button").on("click", function() {
+        startRecording();
       });
 
-      const start = () => mediaRecorder.start();
+      $("#play-button").on("click", function() {
+        stopPlayback();
+        if (sourceNode) {
+          sourceNode.start();
+        }
+      });
 
-      const stop = () =>
-        new Promise((resolve) => {
-          mediaRecorder.addEventListener("stop", () => {
-            const audioBlob = new Blob(audioChunks);
-            const audioUrl = URL.createObjectURL(audioBlob);
+      // ...
 
-            // Create Tone.js effects
-            const reverb = new Tone.Reverb(3).toDestination();
-            const chorus = new Tone.Chorus(4, 2.5, 0.5).connect(reverb);
-            const player = new Tone.Player(audioUrl).connect(chorus);
-            const play = () => player.start();
-
-            // Control elements
-            const reverbControl = document.getElementById("reverb");
-            const chorusControl = document.getElementById("chorus");
-            const volumeControl = document.getElementById("volume");
-
-            // Update effect parameters on control change
-            reverbControl.addEventListener("input", () => {
-              const value = parseFloat(reverbControl.value);
-              reverb.decay = value;
-            });
-
-            chorusControl.addEventListener("input", () => {
-              const value = parseFloat(chorusControl.value);
-              chorus.depth = value;
-            });
-
-            volumeControl.addEventListener("input", () => {
-              const value = parseFloat(volumeControl.value) / 100;
-              player.volume.value = value;
-            });
-
-            resolve({ audioBlob, audioUrl, play });
-          });
-          mediaRecorder.stop();
-        });
-      resolve({ start, stop });
+      // New test link for starting the audio playback
+      $("body").append('<a href="javascript:sourceNode.start()">Test</a>');
     });
-
-  const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
-
-  var record = true;
-
-  const startRecording = async () => {
-    const recording = await recordAudio();
-    const recorder = document.getElementById("recorder");
-    recorder.disabled = true;
-    recording.start();
-    while (record == true) {
-      await sleep(1);
-    }
-    const audio = await recording.stop();
-    await sleep(1000);
-    audio.play();
-    recorder.disabled = false;
-  };
-
-  document.getElementById("recorder").addEventListener("click", (e) => {
-    if (document.getElementById("recorder").classList.contains("recording")) {
-      document.getElementById("recorder").classList.remove("recording");
-      document.getElementById("recorder").classList.add("download");
-      record = false;
-      setTimeout(function () {
-        document.getElementById("recorder").classList.remove("download");
-        document.getElementById("recorder").classList.add("out");
-      }, 1000);
-    } else if (
-      !document.getElementById("recorder").classList.contains("recording") &&
-      !document.getElementById("recorder").classList.contains("download")
-    ) {
-      document.getElementById("recorder").classList.remove("out");
-      document.getElementById("recorder").classList.add("recording");
-      record = true;
-      startRecording();
-    }
-  });
-</script>
+  </script>
 </body>
 </html>
