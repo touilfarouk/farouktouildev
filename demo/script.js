@@ -12,7 +12,7 @@ let button;
 let roomSlider;
 let wetMix;
 
-let baseURL = "https://s3-us-west-1.amazonaws.com/leesamples/samples/";
+let baseURL = "./";
 
 /*Here is where we build our audio effect, and connect its output directly to the master output */
 reverb = new Tone.JCReverb({
@@ -22,9 +22,7 @@ reverb = new Tone.JCReverb({
 
 /* Here is where we build our Samplers and connect their outputs to the input of the audio effect. We do this using the .connect() method, and passing in the variable name of the effect we want to connect to*/
 
-player = new Tone.Player(
-  baseURL + "Rhythmics/60+bpm/Ping+Pong+Ping.mp3"
-).connect(reverb);
+player = new Tone.Player(baseURL + "output.wav").connect(reverb);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
