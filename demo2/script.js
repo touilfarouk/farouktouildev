@@ -1,7 +1,16 @@
 const recordAudio = () =>
   new Promise(async (resolve) => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream);
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (error) {
+      // Handle error (e.g., user denied permission)
+      console.error("Error accessing microphone:", error);
+      return;
+    }
+
+    const options = { mimeType: "audio/webm" };
+    const mediaRecorder = new MediaRecorder(stream, options);
     const audioChunks = [];
     mediaRecorder.addEventListener("dataavailable", (event) => {
       audioChunks.push(event.data);
@@ -12,7 +21,7 @@ const recordAudio = () =>
     const stop = () =>
       new Promise((resolve) => {
         mediaRecorder.addEventListener("stop", () => {
-          const audioBlob = new Blob(audioChunks);
+          const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
           const play = () => audio.play();
@@ -22,6 +31,8 @@ const recordAudio = () =>
       });
     resolve({ start, stop });
   });
+
+// Rest of the code remains the same
 
 const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
