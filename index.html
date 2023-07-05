@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
+  <head>
     <!--=============== basic  ===============-->
     <meta charset="UTF-8" />
     <title>Codacom</title>
@@ -16,14 +16,70 @@
     <link type="text/css" rel="stylesheet" href="./css/style.css" />
     <link type="text/css" rel="stylesheet" href="./css/color.css" />
     <!--=============== favicons ===============-->
-   
-     <!-- pwa manifest and android support -->
-     <link rel="manifest" href="manifest.json" />
-     <meta name="theme-color" content="#bada55" />
-     <!-- ios support -->
-     <link rel="apple-touch-icon" href="/img/icon-96x96.png" />
-     <meta name="apple-mobile-web-app-status-bar" content="#bada55" />
+    <!--=============== player ===============-->
+    <link
+      href="http://fonts.googleapis.com/css?family=Lekton"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/jquery.mb.miniAudioPlayer.min.css"
+      title="style"
+      media="screen"
+    />
+    <!--=============== player ===============-->
+    <!-- pwa manifest and android support -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#bada55" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icon-96x96.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#bada55" />
   </head>
+  <style type="text/css">
+    /*Generic page style*/
+
+    button {
+      padding: 3px;
+      display: inline-block;
+      cursor: pointer;
+      font: 16px/18px Arial, Helvetica, sans-serif;
+      color: #fff;
+      background-color: #ccc;
+      border-radius: 5px;
+      box-shadow: #999 1px 1px 3px;
+      border: 1px solid white;
+      text-shadow: 1px -1px 2px #aaa9a9 !important;
+    }
+
+    button:hover {
+      color: #666;
+    }
+
+    hr {
+      border: none;
+      background-color: #ccc;
+      height: 1px;
+    }
+
+    .wrapper span.param {
+      font: normal 13px/15px Lekton, sans-serif;
+      color: #767676;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .attribution {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #868686;
+    }
+
+    .attribution a {
+      color: #868686;
+    }
+  </style>
   <body>
     <!-- loader   -->
     <div class="loader">
@@ -58,15 +114,17 @@
         <div class="header-contacts">
           <ul>
             <li>
-              <span>01. Call </span>
-              <a href="tel:+4(897)56412322">+4(897)56412322</a>
+              <span>01. Tél</span>
+              <a href="tel:+(+213) 07 99 16 27 46">(+213) 07 99 16 27 46</a>
             </li>
             <li>
-              <span>02. Write </span>
-              <a href="mailto:theside@domain.com">codacom@domain.com</a>
+              <span>02. Veuillez m'écrire </span>
+              <a href="mailto:farouktouil@hotmail.com"
+                >:farouktouil@hotmail.com</a
+              >
             </li>
           </ul>
-          <a href="contacts.html" class="ajax contacts-btn">Get in touch</a>
+          <a href="contacts.html" class="ajax contacts-btn">Contactez moi</a>
         </div>
         <!-- header-contacts end-->
       </header>
@@ -77,10 +135,14 @@
         <div class="left-header_social">
           <ul>
             <li>
-              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://m.facebook.com/touilfarouk/" target="_blank"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
             </li>
             <li>
-              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/touilfarouk/" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
             </li>
             <li>
               <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -208,22 +270,31 @@
                       <!-- swiper-slide-->
                       <div class="swiper-slide">
                         <div class="half-hero-wrap">
-                          <div class="hhw_header">Welcome to my Website</div>
+                          <div class="hhw_header">
+                            Bienvenue sur mon site web
+                          </div>
                           <h1>
-                            Sandy Plegas - <br /><span> Web developer</span> and
-                            designer<br />
-                            form <span>USA</span>
+                            Web Specialist - <br /><span
+                              >Développeur d'applications web</span
+                            >
+                            expérimenté<br />
+                            des Entreprises
                           </h1>
                           <h4>
-                            Praesent eu massa vel diam laoreet elementum ac sed
-                            felis. Donec suscipit ultricies risus sed mollis.
-                            Donec volutpat porta risus posuere imperdiet.
+                            Je suis un développeur web expérimenté, spécialisé
+                            dans la conception et le développement de sites web
+                            conviviaux et performants. J'ai une expertise dans
+                            l'utilisation des dernières technologies pour créer
+                            des expériences utilisateur exceptionnelles. Mon
+                            objectif est de fournir des solutions web de haute
+                            qualité, répondant aux besoins et aux attentes de
+                            mes utilisateurs.
                           </h4>
                           <div class="clearfix"></div>
                           <a
                             href="portfolio.html"
                             class="btn ajax fl-btn color-bg"
-                            ><span>My portfolio</span></a
+                            ><span>Mon portfolio</span></a
                           >
                         </div>
                       </div>
@@ -231,22 +302,27 @@
                       <!-- swiper-slide-->
                       <div class="swiper-slide">
                         <div class="half-hero-wrap">
-                          <div class="hhw_header">12 december 2020</div>
+                          <div class="hhw_header">12 décembre 2020</div>
                           <h1>
-                            Old and Modern <br />
-                            cars on the <span>Newyork</span> <br />
-                            streets
+                            Conception et développement <br />
+                            d'applications mobiles <br />
+                            innovantes
                           </h1>
                           <h4>
-                            Praesent eu massa vel diam laoreet elementum ac sed
-                            felis. Donec suscipit ultricies risus sed mollis.
-                            Donec volutpat porta risus posuere imperdiet.
+                            Je suis un développeur web expérimenté, spécialisé
+                            dans la conception et le développement de sites web
+                            conviviaux et performants. J'ai une expertise dans
+                            l'utilisation des dernières technologies pour créer
+                            des expériences utilisateur exceptionnelles. Mon
+                            objectif est de fournir des solutions web de haute
+                            qualité, répondant aux besoins et aux attentes de
+                            mes utilisateurs.
                           </h4>
                           <div class="clearfix"></div>
                           <a
                             href="portfolio-single.html"
                             class="btn ajax fl-btn color-bg"
-                            ><span>View project</span></a
+                            ><span>Voir le projet</span></a
                           >
                         </div>
                       </div>
@@ -254,21 +330,27 @@
                       <!-- swiper-slide-->
                       <div class="swiper-slide">
                         <div class="half-hero-wrap">
-                          <div class="hhw_header">25 may 2019</div>
+                          <div class="hhw_header">25 mai 2019</div>
                           <h1>
-                            Design and <br />development <br />
-                            of <span> Corporate website</span>
+                            Expérience utilisateur <br />
+                            optimisée pour les <br />
+                            applications mobiles
                           </h1>
                           <h4>
-                            Praesent eu massa vel diam laoreet elementum ac sed
-                            felis. Donec suscipit ultricies risus sed mollis.
-                            Donec volutpat porta risus posuere imperdiet.
+                            Je suis un développeur web expérimenté, spécialisé
+                            dans la conception et le développement de sites web
+                            conviviaux et performants. J'ai une expertise dans
+                            l'utilisation des dernières technologies pour créer
+                            des expériences utilisateur exceptionnelles. Mon
+                            objectif est de fournir des solutions web de haute
+                            qualité, répondant aux besoins et aux attentes de
+                            mes utilisateurs.
                           </h4>
                           <div class="clearfix"></div>
                           <a
                             href="portfolio.html"
                             class="btn ajax fl-btn color-bg"
-                            ><span>View project</span></a
+                            ><span>Voir le projet</span></a
                           >
                         </div>
                       </div>
@@ -276,19 +358,25 @@
                       <!-- swiper-slide-->
                       <div class="swiper-slide">
                         <div class="half-hero-wrap">
-                          <div class="hhw_header">12 april 2020</div>
+                          <div class="hhw_header">12 avril 2020</div>
                           <h1>
-                            Original Design <br />
-                            Features <br />With High <span> Quality Code.</span>
+                            Conception originale <br />
+                            avec un code de haute <br />
+                            qualité.
                           </h1>
                           <h4>
-                            Praesent eu massa vel diam laoreet elementum ac sed
-                            felis. Donec suscipit ultricies risus sed mollis.
-                            Donec volutpat porta risus posuere imperdiet.
+                            Je suis un développeur web expérimenté, spécialisé
+                            dans la conception et le développement de sites web
+                            conviviaux et performants. J'ai une expertise dans
+                            l'utilisation des dernières technologies pour créer
+                            des expériences utilisateur exceptionnelles. Mon
+                            objectif est de fournir des solutions web de haute
+                            qualité, répondant aux besoins et aux attentes de
+                            mes utilisateurs.
                           </h4>
                           <div class="clearfix"></div>
                           <a href="about.html" class="btn ajax fl-btn color-bg"
-                            ><span>About me</span></a
+                            ><span>À propos de moi</span></a
                           >
                         </div>
                       </div>
@@ -398,15 +486,7 @@
               </div>
             </div>
             <!-- hero-container end-->
-            <div class="hero-decor-numb">
-              <span>40.7143528 </span><span>-74.0059731 </span>
-              <a
-                href="https://www.google.com.ua/maps/"
-                target="_blank"
-                class="hero-decor-numb-tooltip"
-                >Based In NewYork</a
-              >
-            </div>
+            <div class="wrapper hero-decor-numb"></div>
             <div class="hero-slider-wrap_pagination"></div>
             <div class="hero-scroll-down-notifer">
               <div class="scroll-down-wrap">
@@ -441,5 +521,22 @@
     <script src="./js/jquery.min.js"></script>
     <script src="./js/plugins.js"></script>
     <script src="./js/scripts.js"></script>
+
+    <script
+      type="text/javascript"
+      src="./js/jquery.mb.miniAudioPlayer.js"
+    ></script>
+    <script type="text/javascript">
+      $(function () {
+        $(".audio").mb_miniPlayer({
+          width: 300,
+          inLine: false,
+          id3: true,
+          addShadow: false,
+          pauseOnWindowBlur: false,
+          downloadPage: null,
+        });
+      });
+    </script>
   </body>
 </html>
