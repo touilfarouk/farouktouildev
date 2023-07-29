@@ -379,7 +379,7 @@
           (p = a.defaultLocale);
         let t = a.assetPrefix || "";
         if (
-          ((r.p = "" + t + "_next/"),
+          ((r.p = "" + t + "https://touilfarouk.github.io/_next"),
           (0, O.setConfig)({
             serverRuntimeConfig: {},
             publicRuntimeConfig: a.runtimeConfig || {},
@@ -447,7 +447,7 @@
                             640, 750, 828, 1080, 1200, 1920, 2048, 3840,
                           ],
                           imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-                          path: "_next/image",
+                          path: "https://touilfarouk.github.io/_nextimage",
                           loader: "default",
                           dangerouslyAllowSVG: !1,
                           unoptimized: !1,
@@ -874,7 +874,10 @@
               (0, c.removeTrailingSlash)((0, l.addLocale)(e, n)),
               ".json"
             );
-            return (0, a.addBasePath)("_next/data/" + this.buildId + t + h, !0);
+            return (0, a.addBasePath)(
+              "https://touilfarouk.github.io/_nextdata/" + this.buildId + t + h,
+              !0
+            );
           })(
             e.skipInterpolation
               ? p
@@ -1234,7 +1237,9 @@
       function d(e, t) {
         return f().then((r) => {
           if (!(t in r)) throw l(Error("Failed to lookup route: " + t));
-          let a = r[t].map((t) => e + "_next/" + encodeURI(t));
+          let a = r[t].map(
+            (t) => e + "https://touilfarouk.github.io/_next" + encodeURI(t)
+          );
           return {
             scripts: a
               .filter((e) => e.endsWith(".js"))
@@ -2713,7 +2718,7 @@
         n = {
           deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
           imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-          path: "_next/image",
+          path: "https://touilfarouk.github.io/_nextimage",
           loader: "default",
           loaderFile: "",
           domains: [],
@@ -4359,7 +4364,10 @@
             (t = (0, n.removeTrailingSlash)(t)),
           e.buildId &&
             (t = (0, o.addPathSuffix)(
-              (0, a.addPathPrefix)(t, "_next/data/" + e.buildId),
+              (0, a.addPathPrefix)(
+                t,
+                "https://touilfarouk.github.io/_nextdata/" + e.buildId
+              ),
               "/" === e.pathname ? "index.json" : ".json"
             )),
           (t = (0, a.addPathPrefix)(t, e.basePath)),
@@ -4487,7 +4495,7 @@
             ((f.pathname = (0, a.removePathPrefix)(f.pathname, u)),
             (f.basePath = u)),
           !0 === t.parseData &&
-            f.pathname.startsWith("_next/data/") &&
+            f.pathname.startsWith("https://touilfarouk.github.io/_nextdata/") &&
             f.pathname.endsWith(".json"))
         ) {
           let e = f.pathname
