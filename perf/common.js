@@ -1,1 +1,0 @@
-!function(){const a="UA-50433259-2";if(window.location.host.includes("arwes.dev")){const t=document.createElement("script");function n(){window.dataLayer.push(arguments)}t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id="+a,document.head.appendChild(t),window.dataLayer=window.dataLayer||[],window.gtag=n,n("js",new Date),n("config",a)}}();
