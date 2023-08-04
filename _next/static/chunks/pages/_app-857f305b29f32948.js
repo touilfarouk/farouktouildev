@@ -1482,7 +1482,7 @@
                     }),
                     (0, a.jsx)("meta", {
                       name: "twitter:site",
-                      content: "@arwesjs",
+                      content: "@codacomjs",
                     }),
                     (0, a.jsx)("link", {
                       rel: "icon",
