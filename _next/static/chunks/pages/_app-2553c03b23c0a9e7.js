@@ -1035,12 +1035,12 @@
             r = (0, R.s0)();
           console.log("URL:", n);
           let [o, s] = (0, i.useState)(
-              n.startsWith("/a-propos-de-moi")
-                ? "/a-propos-de-moi"
-                : n.startsWith("/linux-servers-security")
-                ? "/linux-servers-security"
-                : n.startsWith("/shared-source-code")
-                ? "/shared-source-code"
+              n.startsWith("/a-propos-de-moi.html")
+                ? "/a-propos-de-moi.html"
+                : n.startsWith("/linux-servers-security.html")
+                ? "/linux-servers-security.html"
+                : n.startsWith("/shared-source-code.html")
+                ? "/shared-source-code.html"
                 : "/"
             ),
             l = () => {
@@ -1078,42 +1078,44 @@
                 className: "czken60",
                 children: [
                   (0, a.jsxs)(R.LH, {
-                    condition: () => "/a-propos-de-moi" === o,
+                    condition: () => "/a-propos-de-moi.html" === o,
                     manager: "stagger",
                     unmountOnExited: !0,
                     children: [
                       (0, a.jsx)(ep, {
-                        href: "/a-propos-de-moi",
-                        active: "/a-propos-de-moi" === n,
+                        href: "/a-propos-de-moi.html",
+                        active: "/a-propos-de-moi.html" === n,
                         animated: (0, R.aa)("x", "1rem", 0),
                         onClose: l,
                         onLeft: () => s("/"),
                         children: "About-me",
                       }),
                       (0, a.jsx)(ep, {
-                        href: "/a-propos-de-moi/currently",
-                        active: n.startsWith("/a-propos-de-moi/currently"),
+                        href: "/a-propos-de-moi/currently.html",
+                        active: n.startsWith("/a-propos-de-moi/currently.html"),
                         animated: (0, R.aa)("x", "1rem", 0),
                         onClose: l,
                         children: "Currently",
                       }),
                       (0, a.jsx)(ep, {
-                        href: "/a-propos-de-moi/experience",
-                        active: n.startsWith("/a-propos-de-moi/experience"),
+                        href: "/a-propos-de-moi/experience.html",
+                        active: n.startsWith(
+                          "/a-propos-de-moi/experience.html"
+                        ),
                         animated: (0, R.aa)("x", "1rem", 0),
                         onClose: l,
                         children: "Experience",
                       }),
                       (0, a.jsx)(ep, {
-                        href: "/a-propos-de-moi/design",
-                        active: n.startsWith("/a-propos-de-moi/design"),
+                        href: "/a-propos-de-moi/design.html",
+                        active: n.startsWith("/a-propos-de-moi/design.html"),
                         animated: (0, R.aa)("x", "1rem", 0),
                         onClose: l,
                         children: "Design",
                       }),
                       (0, a.jsx)(ep, {
-                        href: "/a-propos-de-moi/community",
-                        active: n.startsWith("/a-propos-de-moi/community"),
+                        href: "/a-propos-de-moi/community.html",
+                        active: n.startsWith("/a-propos-de-moi/community.html"),
                         animated: (0, R.aa)("x", "1rem", 0),
                         onClose: l,
                         children: "Community",
@@ -1121,41 +1123,44 @@
                     ],
                   }),
                   (0, a.jsx)(R.LH, {
-                    condition: () => "/linux-servers-security" === o,
+                    condition: () => "/linux-servers-security.html" === o,
                     manager: "stagger",
                     unmountOnExited: !0,
                     children: (0, a.jsx)(ep, {
-                      href: "/linux-servers-security/avant-propos",
-                      active: n.startsWith("/linux-servers-security"),
+                      href: "/linux-servers-security/avant-propos.html",
+                      active: n.startsWith("/linux-servers-security.html"),
                       animated: (0, R.aa)("x", "-1rem", 0),
                       onClose: l,
-                      onRight: () => s("/linux-servers-security/avant-propos"),
+                      onRight: () =>
+                        s("/linux-servers-security/avant-propos.html"),
                       children: "linux-servers-security",
                     }),
                   }),
                   (0, a.jsx)(R.LH, {
-                    condition: () => "/shared-source-code" === o,
+                    condition: () => "/shared-source-code.html" === o,
                     manager: "stagger",
                     unmountOnExited: !0,
                     children: (0, a.jsx)(ep, {
-                      href: "/shared-source-code/avant-propos",
-                      active: n.startsWith("/shared-source-code/avant-propos"),
+                      href: "/shared-source-code/avant-propos.html",
+                      active: n.startsWith(
+                        "/shared-source-code/avant-propos.html"
+                      ),
                       animated: (0, R.aa)("x", "-1rem", 0),
                       onClose: l,
-                      onRight: () => s("/shared-source-code/avant-propos"),
+                      onRight: () => s("/shared-source-code/avant-propos.html"),
                       children: "shared-source-code",
                     }),
                   }),
                   (0, a.jsx)(R.LH, {
-                    condition: () => "/a-propos-de-moi" !== o,
+                    condition: () => "/a-propos-de-moi.html" !== o,
                     manager: "stagger",
                     unmountOnExited: !0,
                     children: (0, a.jsx)(ep, {
-                      href: "/a-propos-de-moi",
-                      active: n.startsWith("/a-propos-de-moi"),
+                      href: "/a-propos-de-moi.html",
+                      active: n.startsWith("/a-propos-de-moi.html"),
                       animated: (0, R.aa)("x", "-1rem", 0),
                       onClose: l,
-                      onRight: () => s("/a-propos-de-moi"),
+                      onRight: () => s("/a-propos-de-moi.html"),
                       children: "A propos de moi",
                     }),
                   }),
@@ -1226,10 +1231,12 @@
                           children: (0, a.jsx)(R.LH, {
                             children: (0, a.jsx)(C.sN, {
                               className: (0, R.cx)(eh, N.bV),
-                              active: t.asPath.startsWith("/a-propos-de-moi"),
+                              active: t.asPath.startsWith(
+                                "/a-propos-de-moi.html"
+                              ),
                               animated: d,
                               children: (0, a.jsxs)(F(), {
-                                href: "/a-propos-de-moi",
+                                href: "/a-propos-de-moi.html",
                                 title: "a-propos-de-moi",
                                 children: [
                                   (0, a.jsx)(T.Z, {}),
@@ -1248,7 +1255,7 @@
                 }),
                 center: (0, a.jsxs)(a.Fragment, {
                   children: [
-                    t.asPath.startsWith("/a-propos-de-moi") &&
+                    t.asPath.startsWith("/a-propos-de-moi.html") &&
                       (0, a.jsx)(R.LH, {
                         children: (0, a.jsxs)(C.v2, {
                           className: N.$6,
@@ -1257,47 +1264,47 @@
                             (0, a.jsx)(C.sN, {
                               className: eh,
                               active: t.asPath.includes(
-                                "/a-propos-de-moi/currently"
+                                "/a-propos-de-moi/currently.html"
                               ),
                               children: (0, a.jsx)(F(), {
-                                href: "/a-propos-de-moi/currently",
+                                href: "/a-propos-de-moi/currently.html",
                                 children: "Currently",
                               }),
                             }),
                             (0, a.jsx)(C.sN, {
                               className: eh,
                               active: t.asPath.includes(
-                                "/a-propos-de-moi/experience"
+                                "/a-propos-de-moi/experience.html"
                               ),
                               children: (0, a.jsx)(F(), {
-                                href: "/a-propos-de-moi/experience",
+                                href: "/a-propos-de-moi/experience.html",
                                 children: "Experience",
                               }),
                             }),
                             (0, a.jsx)(C.sN, {
                               className: eh,
                               active: t.asPath.includes(
-                                "/a-propos-de-moi/design"
+                                "/a-propos-de-moi/design.html"
                               ),
                               children: (0, a.jsx)(F(), {
-                                href: "/a-propos-de-moi/design",
+                                href: "/a-propos-de-moi/design.html",
                                 children: "Comming soon",
                               }),
                             }),
                             (0, a.jsx)(C.sN, {
                               className: eh,
                               active: t.asPath.includes(
-                                "/a-propos-de-moi/community"
+                                "/a-propos-de-moi/community.html"
                               ),
                               children: (0, a.jsx)(F(), {
-                                href: "/a-propos-de-moi/community",
+                                href: "/a-propos-de-moi/community.html",
                                 children: "Design",
                               }),
                             }),
                           ],
                         }),
                       }),
-                    t.asPath.startsWith("/linux-servers-security") &&
+                    t.asPath.startsWith("/linux-servers-security.html") &&
                       (0, a.jsx)(R.LH, {
                         children: (0, a.jsx)(C.v2, {
                           className: N.$6,
@@ -1305,16 +1312,16 @@
                           children: (0, a.jsx)(C.sN, {
                             className: eh,
                             active: t.asPath.includes(
-                              "/linux-servers-security/avant-propos"
+                              "/linux-servers-security/avant-propos.html"
                             ),
                             children: (0, a.jsx)(F(), {
-                              href: "/linux-servers-security/avant-propos",
+                              href: "/linux-servers-security/avant-propos.html",
                               children: "Linux Servers Security",
                             }),
                           }),
                         }),
                       }),
-                    t.asPath.startsWith("/shared-source-code") &&
+                    t.asPath.startsWith("/shared-source-code.html") &&
                       (0, a.jsx)(R.LH, {
                         children: (0, a.jsx)(C.v2, {
                           className: N.$6,
@@ -1322,10 +1329,10 @@
                           children: (0, a.jsx)(C.sN, {
                             className: eh,
                             active: t.asPath.includes(
-                              "/shared-source-code/avant-propos"
+                              "/shared-source-code/avant-propos.html"
                             ),
                             children: (0, a.jsx)(F(), {
-                              href: "/shared-source-code/avant-propos",
+                              href: "/shared-source-code/avant-propos.html",
                               children: "shared-source-code",
                             }),
                           }),

@@ -14,16 +14,16 @@
       t.r(n);
       var a = t(2322),
         i = t(4888),
-        r = t.n(i),
-        o = t(2784),
+        o = t.n(i),
+        r = t(2784),
         s = t(9097),
         l = t.n(s),
         c = t(7871),
         d = t(6663),
         p = t(7606);
-      let u = (0, o.createContext)("fr"),
+      let u = (0, r.createContext)("fr"),
         m = () => {
-          let [e, n] = (0, o.useState)("fr"),
+          let [e, n] = (0, r.useState)("fr"),
             t = () => {
               n((e) => ("fr" === e ? "en" : "fr"));
             };
@@ -33,7 +33,7 @@
               combine: !0,
               manager: "stagger",
               children: [
-                (0, a.jsx)(r(), { id: "cd8ac395aa38884", children: "" }),
+                (0, a.jsx)(o(), { id: "cd8ac395aa38884", children: "" }),
                 (0, a.jsxs)(p.Fq, {
                   animated: (0, d.aa)("y", 12, 0),
                   children: [
@@ -248,7 +248,7 @@
                       className: "jsx-cd8ac395aa38884",
                       children: (0, a.jsx)(d.LH, {
                         children: (0, a.jsx)(l(), {
-                          href: "/a-propos-de-moi/currently",
+                          href: "/shared-source-code/avant-propos.html",
                           children: (0, a.jsxs)(p.zx, {
                             frame: "hexagon",
                             animated: [(0, d.Wx)(), (0, d.aa)("x", -12, 0)],
@@ -279,8 +279,8 @@
       "use strict";
       var a = t(2784),
         i = t(73),
-        r = function () {
-          return (r =
+        o = function () {
+          return (o =
             Object.assign ||
             function (e) {
               for (var n, t = 1, a = arguments.length; t < a; t++)
@@ -289,11 +289,11 @@
               return e;
             }).apply(this, arguments);
         },
-        o = a.forwardRef(function (e, n) {
-          var t = r(r({}, a.useContext(i.s)), e);
+        r = a.forwardRef(function (e, n) {
+          var t = o(o({}, a.useContext(i.s)), e);
           return a.createElement(
             "svg",
-            r(
+            o(
               {
                 width: "1.5em",
                 height: "1.5em",
@@ -314,7 +314,7 @@
             })
           );
         });
-      n.Z = o;
+      n.Z = r;
     },
   },
   function (e) {
