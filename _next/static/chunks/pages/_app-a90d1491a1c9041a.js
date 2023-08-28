@@ -784,7 +784,7 @@
         },
         X = "UA-50433259-2",
         K = () => {
-          if (window.location.host.includes("Codacom.dev")) {
+          if (window.location.host.includes("codacom.dev")) {
             let t = document.createElement("script");
             (t.async = !0),
               (t.src = "https://www.googletagmanager.com/gtag/js?id=" + X),
@@ -1534,11 +1534,11 @@
                     }),
                     (0, a.jsx)("meta", {
                       property: "og:image",
-                      content: "https://next.Codacom.dev/Codacom.jpg",
+                      content: "https://next.codacom.dev/codacom.jpg",
                     }),
                     (0, a.jsx)("meta", {
                       property: "og:url",
-                      content: "https://next.Codacom.dev",
+                      content: "https://next.codacom.dev",
                     }),
                     (0, a.jsx)("meta", {
                       property: "og:type",
@@ -1554,7 +1554,7 @@
                     }),
                     (0, a.jsx)("meta", {
                       name: "twitter:site",
-                      content: "@Codacomjs",
+                      content: "@codacomjs",
                     }),
                     (0, a.jsx)("link", {
                       rel: "icon",
@@ -8389,7 +8389,7 @@
             opacity: 1,
           });
           let c = document.createElement("span");
-          c.classList.add("Codacom-text__blink"),
+          c.classList.add("codacom-text__blink"),
             (c.innerHTML = "&#9614;"),
             Object.assign(c.style, {
               position: "relative",
@@ -10319,7 +10319,7 @@
         for (var o = 2; o < r; o++) a[o] = n[o];
         return tu.createElement.apply(null, a);
       };
-      let nB = "Codacom-react-text-text",
+      let nB = "codacom-react-text-text",
         nz = (e) => {
           let {
               as: t = "p",
@@ -10640,7 +10640,7 @@
               {
                 role: "presentation",
                 ref: tf(c, s),
-                className: o("Codacom-react-frames-framesvg", r),
+                className: o("codacom-react-frames-framesvg", r),
                 xmlns: "http://www.w3.org/2000/svg",
                 preserveAspectRatio: "none",
                 style: {
@@ -10725,7 +10725,7 @@
             }, [t, n, r, a, s, i, l]);
           return tu.createElement(nX, {
             ...u,
-            className: o("Codacom-react-frames-framesvgoctagon", c),
+            className: o("codacom-react-frames-framesvgoctagon", c),
             paths: d,
           });
         },
@@ -10771,7 +10771,7 @@
             }, [t, n, r]);
           return tu.createElement(nX, {
             ...s,
-            className: o("Codacom-react-frames-framesvgunderline", a),
+            className: o("codacom-react-frames-framesvgunderline", a),
             paths: i,
           });
         };
@@ -10844,7 +10844,7 @@
           }, [t, n]);
         return tu.createElement(nX, {
           ...a,
-          className: o("Codacom-react-frames-framesvgcorners", r),
+          className: o("codacom-react-frames-framesvgcorners", r),
           paths: s,
         });
       };
@@ -10926,7 +10926,7 @@
             }, [t, n, r]);
           return tu.createElement(nX, {
             ...s,
-            className: o("Codacom-react-frames-framesvglines", a),
+            className: o("codacom-react-frames-framesvglines", a),
             paths: i,
           });
         },
@@ -10981,7 +10981,7 @@
             }, [r, a, t, n, s]);
           return tu.createElement(nX, {
             ...l,
-            className: o("Codacom-react-frames-framesvgnefrex", i),
+            className: o("codacom-react-frames-framesvgnefrex", i),
             paths: c,
           });
         },
@@ -11041,7 +11041,7 @@
             }, [r, a, t, n, s]);
           return tu.createElement(nX, {
             ...l,
-            className: o("Codacom-react-frames-framesvgkranox", i),
+            className: o("codacom-react-frames-framesvgkranox", i),
             paths: c,
           });
         },
@@ -11087,7 +11087,7 @@
             tu.createElement(
               "g",
               {
-                className: o("Codacom-react-frames-illuminatorsvg", r),
+                className: o("codacom-react-frames-illuminatorsvg", r),
                 style: { pointerEvents: "none", ...a },
               },
               tu.createElement(
@@ -11150,7 +11150,7 @@
             }, []),
             tu.createElement("div", {
               role: "presentation",
-              className: o("Codacom-react-frames-illuminator", r),
+              className: o("codacom-react-frames-illuminator", r),
               style: {
                 position: "absolute",
                 width: n,
@@ -11279,7 +11279,7 @@
             tu.createElement("canvas", {
               role: "presentation",
               ref: tf(i, n),
-              className: o("Codacom-react-bgs-dots", r),
+              className: o("codacom-react-bgs-dots", r),
               style: {
                 position: "absolute",
                 left: 0,
@@ -11441,7 +11441,7 @@
             tu.createElement("canvas", {
               role: "presentation",
               ref: tf(i, n),
-              className: o("Codacom-react-bgs-puffs", r),
+              className: o("codacom-react-bgs-puffs", r),
               style: {
                 position: "absolute",
                 left: 0,
@@ -11558,7 +11558,7 @@
             tu.createElement("canvas", {
               role: "presentation",
               ref: tf(i, n),
-              className: o("Codacom-react-bgs-gridlines", r),
+              className: o("codacom-react-bgs-gridlines", r),
               style: {
                 position: "absolute",
                 left: 0,
@@ -11696,7 +11696,7 @@
             tu.createElement("canvas", {
               role: "presentation",
               ref: tf(i, n),
-              className: o("Codacom-react-bgs-movinglines", r),
+              className: o("codacom-react-bgs-movinglines", r),
               style: {
                 position: "absolute",
                 left: 0,

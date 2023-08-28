@@ -154,7 +154,7 @@
                     }),
                     (0, a.jsx)(d.LH, {
                       children: (0, a.jsx)(p.dn, {
-                        "data-Codacom-global-block": !0,
+                        "data-codacom-global-block": !0,
                         animated: (0, d.Wx)(),
                         code: "npm install puppeteer",
                       }),
@@ -171,7 +171,7 @@
                     }),
                     (0, a.jsx)(d.LH, {
                       children: (0, a.jsx)(p.dn, {
-                        "data-Codacom-global-block": !0,
+                        "data-codacom-global-block": !0,
                         animated: (0, d.Wx)(),
                         code: "const puppeteer = require('puppeteer');\n\n  (async () => {\n    const browser = await puppeteer.launch();\n    const page = await browser.newPage();\n    await page.goto('https://codacom.vercel.app/');\n    \n    await browser.close();\n  })();\n\n              ",
                       }),
@@ -188,7 +188,7 @@
                     }),
                     (0, a.jsx)(d.LH, {
                       children: (0, a.jsx)(p.dn, {
-                        "data-Codacom-global-block": !0,
+                        "data-codacom-global-block": !0,
                         animated: (0, d.Wx)(),
                         code: '<!DOCTYPE html>\n  <html>\n  <head>\n      <title>Sample Form</title>\n  </head>\n  <body>\n      <form action="/submit" method="post">\n          <label for="name">Name:</label>\n          <input type="text" id="name" name="name" required>\n          <br>\n          <label for="email">Email:</label>\n          <input type="email" id="email" name="email" required>\n          <br>\n          <label for="terms">Terms and Conditions:</label>\n          <input type="checkbox" id="terms" name="terms" required>\n          <br>\n          <label for="gender-male">Male:</label>\n          <input type="radio" id="gender-male" name="gender" value="male" required>\n          <label for="gender-female">Female:</label>\n          <input type="radio" id="gender-female" name="gender" value="female" required>\n          <br>\n          <label for="select-option">Select an option:</label>\n          <select id="select-option" name="select-option" required>\n              <option value="option1">Option 1</option>\n              <option value="option2">Option 2</option>\n              <option value="option3">Option 3</option>\n          </select>\n          <br>\n          <label for="message">Message:</label>\n          <textarea id="message" name="message" required></textarea>\n          <br>\n          <label for="file-upload">Upload File:</label>\n          <input type="file" id="file-upload" name="file-upload" required>\n          <br>\n          <label for="date-input">Date:</label>\n          <input type="date" id="date-input" name="date-input" required>\n          <br>\n          <button type="submit">Submit</button>\n      </form>\n  </body>\n  </html>\n              \n              \n              ',
                       }),
@@ -205,7 +205,7 @@
                     }),
                     (0, a.jsx)(d.LH, {
                       children: (0, a.jsx)(p.dn, {
-                        "data-Codacom-global-block": !0,
+                        "data-codacom-global-block": !0,
                         animated: (0, d.Wx)(),
                         code: '\n  import puppeteer from "puppeteer";\n\n  (async () => {\n    const browser = await puppeteer.launch({ headless: false });\n    const page = await browser.newPage();\n  \n    await page.goto("http://127.0.0.1:5500/index/"); // Replace "http://127.0.0.1:5500/index/" with the actual URL of your form.\n  \n    // Wait for the "name" input field to be present and become clickable\n    await page.waitForSelector("#name");\n  \n    // Type your name into the "name" input field\n    await page.type("#name", "farouk", { delay: 100 }); // Replace "nassila" with the name you want to enter.\n  \n    // Wait for the "email" input field to be present and become clickable\n    await page.waitForSelector("#email");\n  \n    // Type your email into the "email" input field\n    await page.type("#email", "farouk@hotmail.com", { delay: 100 }); // Replace "nassil@nassil.com" with the email you want to enter.\n  \n    // Check the checkbox with ID "terms"\n    await page.click("#terms");\n  \n    // Select the radio button with ID "gender-female"\n    await page.click("#gender-male");\n  \n    // Select "Option 2" from the dropdown with ID "select-option"\n    await page.select("#select-option", "option2");\n  \n    // Type text into the textarea with ID "message"\n    await page.type("#message", "This is a sample message.", { delay: 50 });\n  \n    // Attach a local file to the file input with ID "file-upload"\n    const fileInput = await page.$("#file-upload");\n    await fileInput.uploadFile("./path/to/your/file.pdf"); // Replace "./path/to/your/file.pdf" with the actual path to the file you want to upload.\n  \n    // Type a date into the date input with ID "date-input"\n    await page.type("#date-input", "2023-07-28");\n  \n    // Wait for the "Submit" button to be present and become clickable\n    await page.waitForSelector("button[type=\'submit\']");\n  \n    // Simulate a click on the "Submit" button and log the event\n    await page.evaluate(() => {\n      const submitButton = document.querySelector("button[type=\'submit\']");\n      submitButton.addEventListener("click", () => {\n        alert("Click event occurred!");\n      });\n      submitButton.click();\n    });\n  \n    // Take a screenshot after the click\n    await page.screenshot({\n      path: "./screens/samplechapters1.jpg", // You can change the file name and path as per your preference.\n      fullPage: true,\n    });\n  \n    // Close the browser\n    await browser.close();\n  })();\n              \n              \n              ',
                       }),
@@ -222,7 +222,7 @@
                     }),
                     (0, a.jsx)(d.LH, {
                       children: (0, a.jsx)(p.dn, {
-                        "data-Codacom-global-block": !0,
+                        "data-codacom-global-block": !0,
                         animated: (0, d.Wx)(),
                         code: '\n  {\n    "name": "pptr",\n    "version": "1.0.0",\n    "description": "",\n    "main": "app.js",\n    "type": "module",\n    "scripts": {\n      "test": "echo "Error: no test specified" && exit 1"\n    },\n    "keywords": [],\n    "author": "",\n    "license": "ISC",\n    "dependencies": {\n      "puppeteer": "^19.4.0",\n    }\n  }\n              \n              \n              ',
                       }),
