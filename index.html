@@ -30,14 +30,6 @@
     ></canvas>
     <button id="fullscreenButton">Fullscreen</button>
     <script>
-              const audio = new Audio("music.wav");
-const playAudio = () => {
-  audio.play();
-};
-audio.addEventListener("error", () => {
-  console.error("Error loading audio");
-});
-            
       const fullscreenButton = document.getElementById("fullscreenButton");
 
       // Feature detect
@@ -45,7 +37,6 @@ audio.addEventListener("error", () => {
         document.fullscreenEnabled || document.webkitFullscreenEnabled;
 
       if (fullscreenEnabled) {
-        playAudio();
         fullscreenButton.addEventListener("click", () => {
           if (document.fullscreenElement) {
             document.exitFullscreen();

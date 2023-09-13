@@ -319,7 +319,15 @@ function GameShell({ canvasIdentifier }) {
           onClick={() => {
             // Set up audio. Must call this inside a click handler for iOS audio to work.
             createAudioContext();
+            const audio = new Audio("music.wav");
+            const playAudio = () => {
+              audio.play();
+            };
+            audio.addEventListener("error", () => {
+              console.error("Error loading audio");
+            });
 
+            playAudio();
             // Update game state.
             setGameState(GameState.Loading);
           }}
