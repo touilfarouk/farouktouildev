@@ -323,6 +323,7 @@ function GameShell({ canvasIdentifier }) {
             const playAudio = () => {
               audio.play();
             };
+            playAudio();
             audio.addEventListener("error", () => {
               console.error("Error loading audio");
             });
