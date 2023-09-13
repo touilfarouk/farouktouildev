@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- iOS meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+
+    <title>Fullscreen App</title>
+    <script src="https://cdn.jsdelivr.net/npm/fullscreen-polyfill@1.1.0/dist/fullscreen.polyfill.min.js"></script>
+  </head>
+
+  <body>
+    <button id="fullscreenButton">Fullscreen</button>
+
+    <script>
+      const fullscreenButton = document.getElementById("fullscreenButton");
+
+      // Feature detect
+      const fullscreenEnabled =
+        document.fullscreenEnabled || document.webkitFullscreenEnabled;
+
+      if (fullscreenEnabled) {
+        fullscreenButton.addEventListener("click", () => {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            document.body.requestFullscreen().catch((err) => {
+              alert(
+                `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+              );
+            });
+          }
+        });
+      } else {
+        fullscreenButton.style.display = "none";
+      }
+
+      // iOS fullscreen on launch
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        document.documentElement.classList.add("mobile");
+      }
+    </script>
+  </body>
+</html>

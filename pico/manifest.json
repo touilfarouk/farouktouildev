@@ -33,7 +33,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/pico/index.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#3e4eb8",
   "theme_color": "#2f3ba2"
