@@ -32,29 +32,30 @@ const pico8_buttons = [0, 0, 0, 0, 0, 0, 0, 0]; // Max 8 players.
 // When `pico8_audio_context` is defined globally, PICO-8 will manipulate the
 // AudioContext referenced by `pico8_audio_context`, instead of creating one of
 // its own.
-let pico8_audio_context = null;
+//let pico8_audio_context = null;
 
 // PICO-8's JavaScript looks at `Module.canvas` to access the <canvas> element.
 // We initialize `Module.canvas` before loading PICO-8's JavaScript, see the
 // <Game /> component.
 const Module = {
-  canvas: null
+  canvas: null,
 };
 
 // Platform detection
-const getMobileDetect = userAgent => {
+const getMobileDetect = (userAgent) => {
   const isAndroid = () => Boolean(userAgent.match(/Android/i));
   const isIos = () => Boolean(userAgent.match(/iPhone|iPad|iPod/i));
   const isOpera = () => Boolean(userAgent.match(/Opera Mini/i));
   const isWindows = () => Boolean(userAgent.match(/IEMobile/i));
 
-  const isMobile = () => Boolean(isAndroid() || isIos() || isOpera() || isWindows());
+  const isMobile = () =>
+    Boolean(isAndroid() || isIos() || isOpera() || isWindows());
   const isDesktop = () => !isMobile();
   return {
     isMobile,
     isDesktop,
     isAndroid,
-    isIos
+    isIos,
   };
 };
 
@@ -65,7 +66,7 @@ const useMobileDetect = () => {
 
 // Orientation detection
 function isOrientationPortrait() {
-  return (window.matchMedia("(orientation: portrait)")).matches;
+  return window.matchMedia("(orientation: portrait)").matches;
 }
 
 /**
@@ -75,7 +76,7 @@ function isOrientationPortrait() {
 const GameState = {
   Paused: "Paused",
   Loading: "Loading",
-  Active: "Active"
+  Active: "Active",
 };
 
 // <AddToHomeScreen /> displays an "Add <game> to Home Screen" button if conditions are met.
@@ -90,10 +91,8 @@ function AddToHomeScreenButton({ gameName, style }) {
   // Save this event, so that we can call .prompt() on the event when the user
   // clicks our "Add <game> to Home Screen" button.
 
-  const [
-    beforeInstallPromptEvent,
-    setBeforeInstallPromptEvent
-  ] = React.useState(null);
+  const [beforeInstallPromptEvent, setBeforeInstallPromptEvent] =
+    React.useState(null);
 
   React.useEffect(() => {
     window.addEventListener("beforeinstallprompt", setBeforeInstallPromptEvent);
@@ -112,7 +111,7 @@ function AddToHomeScreenButton({ gameName, style }) {
         fontSize: "0.6rem",
         backgroundColor: "white",
         padding: "8px 16px",
-        ...style
+        ...style,
       }}
       id="AddToHomeScreenStyledInAppCSS"
       onClick={async () => {
@@ -151,7 +150,7 @@ function GameShell({ canvasIdentifier }) {
   const [isPortrait, setPortrait] = React.useState(isOrientationPortrait());
 
   React.useEffect(() => {
-    window.addEventListener("orientationchange", function() {
+    window.addEventListener("orientationchange", function () {
       setPortrait(!isOrientationPortrait());
     });
   });
@@ -161,7 +160,7 @@ function GameShell({ canvasIdentifier }) {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <div
@@ -173,18 +172,23 @@ function GameShell({ canvasIdentifier }) {
           alignItems: "center",
           justifyContent: "space-between",
           paddingTop: 32,
-          paddingBottom: 40
+          paddingBottom: 40,
         }}
       >
         <img alt="pico8" src="./images/pico8_logo_vector.png" width={100} />
-        <AnalogStick areaRadius={50} threshold={30} stickRadius={20} isPortrait={isPortrait} />
+        <AnalogStick
+          areaRadius={50}
+          threshold={30}
+          stickRadius={20}
+          isPortrait={isPortrait}
+        />
       </div>
       <div
         style={{
           flex: 1,
           position: "relative",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <Game
@@ -205,43 +209,43 @@ function GameShell({ canvasIdentifier }) {
           flexDirection: "column",
           justifyContent: "space-between",
           paddingTop: 32,
-          paddingBottom: 40
+          paddingBottom: 40,
         }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
-           <FullscreenMenu
+          <FullscreenMenu
             isFullscreenOn={isFullscreenOn}
-            setFullscreenOn={isFullscreenOnNow => {
+            setFullscreenOn={(isFullscreenOnNow) => {
               if (gameState !== GameState.Active) return;
-              var is_fullscreen=(document.fullscreenElement || document.mozFullScreenElement || document.webkitIsFullScreen || document.msFullscreenElement);
-              if (is_fullscreen)
-		          {
-                  if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                       
-                    }
-                   
-                } else {
-		
-		            var el = document.getElementById(canvasIdentifier);
-		          if ( el.requestFullscreen ) {
-		            	el.requestFullscreen();
-		            } else if ( el.mozRequestFullScreen ) {
-		            	el.mozRequestFullScreen();
-		            } else if ( el.webkitRequestFullScreen ) {
-		              	el.webkitRequestFullScreen( Element.ALLOW_KEYBOARD_INPUT );
+              var is_fullscreen =
+                document.fullscreenElement ||
+                document.mozFullScreenElement ||
+                document.webkitIsFullScreen ||
+                document.msFullscreenElement;
+              if (is_fullscreen) {
+                if (document.exitFullscreen) {
+                  document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                  document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                  document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                  document.msExitFullscreen();
+                }
+              } else {
+                var el = document.getElementById(canvasIdentifier);
+                if (el.requestFullscreen) {
+                  el.requestFullscreen();
+                } else if (el.mozRequestFullScreen) {
+                  el.mozRequestFullScreen();
+                } else if (el.webkitRequestFullScreen) {
+                  el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
                 }
               }
               setFullscreenOn(is_fullscreen);
@@ -249,7 +253,7 @@ function GameShell({ canvasIdentifier }) {
           />
           <SoundSwitch
             isSoundOn={isSoundOn}
-            setSoundOn={isSoundOnNow => {
+            setSoundOn={(isSoundOnNow) => {
               if (gameState !== GameState.Active) return;
               Module.pico8ToggleSound(isSoundOnNow);
               setSoundOn(isSoundOnNow);
@@ -258,7 +262,7 @@ function GameShell({ canvasIdentifier }) {
           />
           <HamburgerMenu
             isMenuOn={isMenuOn}
-            setMenuOn={isMenuOnNow => {
+            setMenuOn={(isMenuOnNow) => {
               if (gameState !== GameState.Active) return;
               Module.pico8TogglePaused(isMenuOnNow);
               setMenuOn(isMenuOnNow);
@@ -268,7 +272,7 @@ function GameShell({ canvasIdentifier }) {
           />
           <ControlsMenu
             isControlsOn={isControlsOn}
-            setControlsOn={isControlsOnNow => {
+            setControlsOn={(isControlsOnNow) => {
               if (gameState !== GameState.Active) return;
               Module.pico8ToggleControlMenu(isControlsOnNow);
               setControlsOn(isControlsOnNow);
@@ -281,29 +285,29 @@ function GameShell({ canvasIdentifier }) {
             display: "flex",
             justifyContent: "center",
             position: "relative",
-            top: -30
+            top: -30,
           }}
         >
           <XButton
             isPressed={isXPressed}
-            setPressed={isXPressedNow => {
+            setPressed={(isXPressedNow) => {
               pico8_buttons[0] = updateXButton(pico8_buttons[0], isXPressedNow);
               setXPressed(isXPressedNow);
             }}
             style={{
               position: "relative",
-              top: 20
+              top: 20,
             }}
             isPortrait={isPortrait}
           />
           <OButton
             isPressed={isOPressed}
-            setPressed={isOPressedNow => {
+            setPressed={(isOPressedNow) => {
               pico8_buttons[0] = updateOButton(pico8_buttons[0], isOPressedNow);
               setOPressed(isOPressedNow);
             }}
             style={{
-              marginLeft: 10
+              marginLeft: 10,
             }}
             isPortrait={isPortrait}
           />
@@ -313,6 +317,7 @@ function GameShell({ canvasIdentifier }) {
         <PlayButton
           style={{ position: "absolute" }}
           onClick={() => {
+            playAudio();
             // Set up audio. Must call this inside a click handler for iOS audio to work.
             createAudioContext();
 
@@ -325,6 +330,13 @@ function GameShell({ canvasIdentifier }) {
     </div>
   );
 }
+const audio = new Audio("music.wav");
+const playAudio = () => {
+  audio.play();
+};
+audio.addEventListener("error", () => {
+  console.error("Error loading audio");
+});
 
 // <PlayButton /> displays the standard PICO-8 play button.
 function PlayButton({ style, onClick, isPortrait }) {
@@ -332,19 +344,19 @@ function PlayButton({ style, onClick, isPortrait }) {
     throw new Error(`<PlayButton /> requires an onClick property.`);
   }
 
-  return ( isPortrait && useMobileDetect().isMobile() ? (
+  return isPortrait && useMobileDetect().isMobile() ? (
     <img
-    alt="rotate phone"
-    src="images/rotate.gif"
-    style={{ position: "absolute" }}
+      alt="rotate phone"
+      src="images/rotate.gif"
+      style={{ position: "absolute" }}
     />
-    ) : (
+  ) : (
     <div
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        ...style
+        ...style,
       }}
     >
       <div style={{ position: "relative" }}>
@@ -353,12 +365,12 @@ function PlayButton({ style, onClick, isPortrait }) {
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAABpklEQVR42u3au23DQBCEYUXOXIGKcujQXUgFuA0XIKgW90Q9oEAg+Ljd27vd2RsCf058gEDqhofPj+OB6SMCAQlIQAIyAhKQgARkBAQDnM6XSRsB7/2e/tSA0//12fCAKsQX3ntDA4oRFwBRIc0AixE38BAhTQGLEAsBUSDNAXcRhYDRIZsAPlp99VECRoXsDpgN0g0wC6Q7IDpkGEBUyG6A0+vKBtkdMBukG2AWSHdAdMgwgKiQ4QDRIMMCokCGB4wOCQPYFVKw2cABNocUjl6wgE0gFashPKAZpHJ2TQNYBVmxW6cDFENWDv9pAUshCVgJScBKSAISkD9hPkT4GkNAMdzepyj8Kye852EBLe51CZHHWQK4JcThD1SlcHPEYY/0a+A0n6SkGZV6w6WZNb3g4Id1b7hwgGhwYQBR4dwB0eHcALPAdQfMBhcOEA0uDCAqnDsgOpwbYBa4poA/31+rZYFrBriFpwGMCtcEcA9PAhgdzhywBK8EEQXOFFCCtwaIBmcGKMWbI6LCmQBq8R6hw5kAMgISkIAEJCAjIAEJSEBGQI9ukV7lRn9nD+gAAAAASUVORK5CYII="
           style={{ position: "absolute" }}
           id="PlayButtonStyledInAppCSS"
-          onContextMenu={e => e.preventDefault()}
+          onContextMenu={(e) => e.preventDefault()}
           onClick={onClick}
         />
       </div>
     </div>
-  ));
+  );
 }
 
 // <Game /> contains the actual PICO-8 game.
@@ -414,40 +426,42 @@ function SoundSwitch({ isSoundOn, setSoundOn, isPortrait }) {
   }
 
   if (useMobileDetect().isDesktop() || !isPortrait) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        height: 32,
-        alignSelf: "stretch",
-        justifyContent: "center",
-      }}
-      onClick={() => {
-        setSoundOn(!isSoundOn);
-      }}
-    >
+    return (
       <div
         style={{
-          height: 24,
-          width: 24,
-          overflow: "hidden",
-          position: "relative",
-          left: 2
-        }}>
-      {isSoundOn ? (
-        <img
-          alt="sound on"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAPUlEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwhZQLQDqG4BsZFIKMhGLRi1YChbMPRz8vArTYdPjTboAQCSVgpXUWQAMAAAAABJRU5ErkJggg=="
-        />
-      ) : (
-        <img
-          alt="sound off"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAANklEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwavBcRG4qgFoxYMZwuGfk4efqXp8KnRBj0AAMz7cLDnG4FeAAAAAElFTkSuQmCC"
-        />
-      )}
-    </div></div>
-  );
+          display: "flex",
+          alignItems: "center",
+          height: 32,
+          alignSelf: "stretch",
+          justifyContent: "center",
+        }}
+        onClick={() => {
+          setSoundOn(!isSoundOn);
+        }}
+      >
+        <div
+          style={{
+            height: 24,
+            width: 24,
+            overflow: "hidden",
+            position: "relative",
+            left: 2,
+          }}
+        >
+          {isSoundOn ? (
+            <img
+              alt="sound on"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAPUlEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwhZQLQDqG4BsZFIKMhGLRi1YChbMPRz8vArTYdPjTboAQCSVgpXUWQAMAAAAABJRU5ErkJggg=="
+            />
+          ) : (
+            <img
+              alt="sound off"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAANklEQVRIx2NgGDHg/8cX/5Hx0LEA3cChYwEugwavBcRG4qgFoxYMZwuGfk4efqXp8KnRBj0AAMz7cLDnG4FeAAAAAElFTkSuQmCC"
+            />
+          )}
+        </div>
+      </div>
+    );
   }
   return null;
 }
@@ -457,39 +471,43 @@ function HamburgerMenu({ isMenuOn, setMenuOn, isPortrait, style }) {
   if (!setMenuOn) {
     throw new Error("<HamburgerMenu /> requires an `setMenuOn` property.");
   }
- 
+
   if (useMobileDetect().isMobile() && !isPortrait) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        height: 32,
-        alignSelf: "stretch",
-        justifyContent: "center",
-        ...style
-      }}
-      onClick={() => {
-        setMenuOn(!isMenuOn);
-      }}
-    >
+    return (
       <div
         style={{
-          height: 10,
-          width: 24,
-          overflow: "hidden",
-          position: "relative",
-          left: 2
+          display: "flex",
+          alignItems: "center",
+          height: 32,
+          alignSelf: "stretch",
+          justifyContent: "center",
+          ...style,
+        }}
+        onClick={() => {
+          setMenuOn(!isMenuOn);
         }}
       >
-        <img
-          alt="toggle menu"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAKUlEQVRIx2NgGHbg/8cX/7FhctWNWjBqwagFoxaMWjBqwagF5Fkw5AAAPaGZvsIUtXUAAAAASUVORK5CYII="
-          style={{ position: "absolute", transform: "rotate(90deg)", top: -2 }}
-        />
+        <div
+          style={{
+            height: 10,
+            width: 24,
+            overflow: "hidden",
+            position: "relative",
+            left: 2,
+          }}
+        >
+          <img
+            alt="toggle menu"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAKUlEQVRIx2NgGHbg/8cX/7FhctWNWjBqwagFoxaMWjBqwagF5Fkw5AAAPaGZvsIUtXUAAAAASUVORK5CYII="
+            style={{
+              position: "absolute",
+              transform: "rotate(90deg)",
+              top: -2,
+            }}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
   }
   return null;
 }
@@ -500,38 +518,38 @@ function ControlsMenu({ isControlsOn, setControlsOn, style }) {
     throw new Error("<ControlsMenu /> requires an `setControlsOn` property.");
   }
 
-  if(useMobileDetect().isDesktop()) {
-  return ( 
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        height: 64,
-        alignSelf: "stretch",
-        justifyContent: "center",
-        ...style
-      }}
-      onClick={() => {
-        setControlsOn(!isControlsOn);
-      }}
-    >
+  if (useMobileDetect().isDesktop()) {
+    return (
       <div
         style={{
-          height: 24,
-          width: 24,
-          overflow: "hidden",
-          position: "relative",
-          left: 2
+          display: "flex",
+          alignItems: "center",
+          height: 64,
+          alignSelf: "stretch",
+          justifyContent: "center",
+          ...style,
+        }}
+        onClick={() => {
+          setControlsOn(!isControlsOn);
         }}
       >
-        <img
-          alt="toggle controls"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAQ0lEQVRIx2NgGAXEgP8fX/ynBaap4XBLhqcF1IyfYWQBrZLz0LEAlzqqxQFVLcAmT3MLqJqTaW7B4CqLaF4fjIIBBwBL/B2vqtPVIwAAAABJRU5ErkJggg=="
-          style={{ position: "absolute", top: -2 }}
-        />
+        <div
+          style={{
+            height: 24,
+            width: 24,
+            overflow: "hidden",
+            position: "relative",
+            left: 2,
+          }}
+        >
+          <img
+            alt="toggle controls"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAQ0lEQVRIx2NgGAXEgP8fX/ynBaap4XBLhqcF1IyfYWQBrZLz0LEAlzqqxQFVLcAmT3MLqJqTaW7B4CqLaF4fjIIBBwBL/B2vqtPVIwAAAABJRU5ErkJggg=="
+            style={{ position: "absolute", top: -2 }}
+          />
+        </div>
       </div>
-    </div>
-    ); 
+    );
   }
   return null;
 }
@@ -539,40 +557,41 @@ function ControlsMenu({ isControlsOn, setControlsOn, style }) {
 // <FullscreenMenu /> toggles fullscreen mode on or off.
 function FullscreenMenu({ isFullscreenOn, setFullscreenOn, style }) {
   if (!setFullscreenOn) {
-    throw new Error("<FullscreenMenu /> requires an `setFullscreenOn` property.");
-
+    throw new Error(
+      "<FullscreenMenu /> requires an `setFullscreenOn` property."
+    );
   }
-  if(useMobileDetect().isDesktop()) {
-  return (  
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        height: 64,
-        alignSelf: "stretch",
-        justifyContent: "center",
-        ...style
-      }}
-      onClick={() => {
-        setFullscreenOn(!isFullscreenOn);
-      }}
-    >
+  if (useMobileDetect().isDesktop()) {
+    return (
       <div
         style={{
-          height: 24,
-          width: 24,
-          overflow: "hidden",
-          position: "relative",
-          left: 2
+          display: "flex",
+          alignItems: "center",
+          height: 64,
+          alignSelf: "stretch",
+          justifyContent: "center",
+          ...style,
+        }}
+        onClick={() => {
+          setFullscreenOn(!isFullscreenOn);
         }}
       >
-        <img
-          alt="toggle fullscreen"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAN0lEQVRIx2NgGPLg/8cX/2mJ6WcBrUJm4CwgOSgGrQVEB8WoBaMWDGMLhm5OHnql6dCt0YY8AAA9oZm+9Z9xQAAAAABJRU5ErkJggg=="
-          style={{ position: "absolute", top: -2 }}
-        />
+        <div
+          style={{
+            height: 24,
+            width: 24,
+            overflow: "hidden",
+            position: "relative",
+            left: 2,
+          }}
+        >
+          <img
+            alt="toggle fullscreen"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAN0lEQVRIx2NgGPLg/8cX/2mJ6WcBrUJm4CwgOSgGrQVEB8WoBaMWDGMLhm5OHnql6dCt0YY8AAA9oZm+9Z9xQAAAAABJRU5ErkJggg=="
+            style={{ position: "absolute", top: -2 }}
+          />
+        </div>
       </div>
-    </div>
     );
   }
   return null;
@@ -601,7 +620,7 @@ function AnalogStick({ areaRadius, threshold, stickRadius, isPortrait }) {
   const [analogStickX, setAnalogStickX] = React.useState(areaRadius);
   const [analogStickY, setAnalogStickY] = React.useState(areaRadius);
 
-  const handleMove = e => {
+  const handleMove = (e) => {
     // Extract fields from touch event.
     const { left, top } = divRef.current.getBoundingClientRect();
     const touchObj = extractRelevantFields(e.changedTouches[0]);
@@ -646,59 +665,59 @@ function AnalogStick({ areaRadius, threshold, stickRadius, isPortrait }) {
         left: isLeft,
         right: isRight,
         up: isUp,
-        down: isDown
+        down: isDown,
       });
     } else {
       pico8_buttons[0] = updateDirectionPad(pico8_buttons[0], {
         left: false,
         right: false,
         up: false,
-        down: false
+        down: false,
       });
     }
   };
 
   if (useMobileDetect().isMobile() && !isPortrait) {
-  return (
-    <div
-      style={{
-        backgroundColor: "gray",
-        borderRadius: "50%",
-        width: areaRadius * 2,
-        height: areaRadius * 2,
-        position: "relative"
-      }}
-      onContextMenu={e => e.preventDefault()}
-      ref={divRef}
-      onTouchStart={handleMove}
-      onTouchMove={handleMove}
-      onTouchEnd={e => {
-        // Reset analog stick to center of analog stick area.
-        setAnalogStickX(areaRadius);
-        setAnalogStickY(areaRadius);
-
-        // Update PICO-8 global state.
-        pico8_buttons[0] = updateDirectionPad(pico8_buttons[0], {
-          left: false,
-          right: false,
-          up: false,
-          down: false
-        });
-      }}
-    >
+    return (
       <div
         style={{
-          backgroundColor: "lightgray",
-          width: stickRadius * 2,
-          height: stickRadius * 2,
-          left: analogStickX - stickRadius,
-          top: analogStickY - stickRadius,
-          position: "absolute",
-          borderRadius: "50%"
+          backgroundColor: "gray",
+          borderRadius: "50%",
+          width: areaRadius * 2,
+          height: areaRadius * 2,
+          position: "relative",
         }}
-      />
-    </div>
-  );
+        onContextMenu={(e) => e.preventDefault()}
+        ref={divRef}
+        onTouchStart={handleMove}
+        onTouchMove={handleMove}
+        onTouchEnd={(e) => {
+          // Reset analog stick to center of analog stick area.
+          setAnalogStickX(areaRadius);
+          setAnalogStickY(areaRadius);
+
+          // Update PICO-8 global state.
+          pico8_buttons[0] = updateDirectionPad(pico8_buttons[0], {
+            left: false,
+            right: false,
+            up: false,
+            down: false,
+          });
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "lightgray",
+            width: stickRadius * 2,
+            height: stickRadius * 2,
+            left: analogStickX - stickRadius,
+            top: analogStickY - stickRadius,
+            position: "absolute",
+            borderRadius: "50%",
+          }}
+        />
+      </div>
+    );
   }
   return null;
 }
@@ -713,20 +732,20 @@ const ButtonStyles = {
   justifyContent: "center",
   fontFamily: "sans-serif",
   color: "white",
-  fontWeight: 100
+  fontWeight: 100,
 };
 
 const XButtonStyles = {
   backgroundColor: "blue",
-}
+};
 
 const OButtonStyles = {
   backgroundColor: "green",
-}
+};
 
 const ActiveStyles = {
   backgroundColor: "white",
-  color: "#222"
+  color: "#222",
 };
 
 // <OButton /> controls PICO-8's 'O' button state.
@@ -736,21 +755,20 @@ function OButton({ isPressed, setPressed, isPortrait, style: customStyle }) {
   if (!setPressed)
     throw new Error("<OButton /> is missing a `setPressed` property.");
 
-    const style = isPressed
+  const style = isPressed
     ? { ...ButtonStyles, ...OButtonStyles, ...ActiveStyles }
     : { ...ButtonStyles, ...OButtonStyles };
 
   if (useMobileDetect().isMobile() && !isPortrait) {
-  return (
-    <div
-      style={{ ...style, ...customStyle }}
-      onContextMenu={e => e.preventDefault()}
-      onTouchStart={() => setPressed(true)}
-      onTouchEnd={() => setPressed(false)}
-      onTouchCancel={() => setPressed(false)}
-    >
-    </div>
-  );
+    return (
+      <div
+        style={{ ...style, ...customStyle }}
+        onContextMenu={(e) => e.preventDefault()}
+        onTouchStart={() => setPressed(true)}
+        onTouchEnd={() => setPressed(false)}
+        onTouchCancel={() => setPressed(false)}
+      ></div>
+    );
   }
   return null;
 }
@@ -762,21 +780,20 @@ function XButton({ isPressed, setPressed, isPortrait, style: customStyle }) {
   if (!setPressed)
     throw new Error("<XButton /> is missing a `setPressed` property.");
 
-    const style = isPressed
+  const style = isPressed
     ? { ...ButtonStyles, ...XButtonStyles, ...ActiveStyles }
     : { ...ButtonStyles, ...XButtonStyles };
-  
-    if (useMobileDetect().isMobile() && !isPortrait) {
+
+  if (useMobileDetect().isMobile() && !isPortrait) {
     return (
-    <div
-      style={{ ...style, ...customStyle }}
-      onContextMenu={e => e.preventDefault()}
-      onTouchStart={() => setPressed(true)}
-      onTouchEnd={() => setPressed(false)}
-      onTouchCancel={() => setPressed(false)}
-    >
-    </div>
-  );
+      <div
+        style={{ ...style, ...customStyle }}
+        onContextMenu={(e) => e.preventDefault()}
+        onTouchStart={() => setPressed(true)}
+        onTouchEnd={() => setPressed(false)}
+        onTouchCancel={() => setPressed(false)}
+      ></div>
+    );
   }
   return null;
 }
@@ -873,17 +890,17 @@ function createAudioContext() {
     window.msAudioContext;
 
   // Create context object.
-  pico8_audio_context = new AudioContext();
+  //pico8_audio_context = new AudioContext();
   const source = pico8_audio_context.createBufferSource();
   source.buffer = pico8_audio_context.createBuffer(1, 1, 22050);
   source.connect(pico8_audio_context.destination);
 
   // Wake up audio on iOS.
-  if (source.noteOn) {
-    source.noteOn(0);
-  } else {
-    source.start(0);
-  }
+  //if (source.noteOn) {
+  //source.noteOn(0);
+  //} else {
+  //source.start(0);
+  //}
 }
 
 // rotate a 2D vector by `angle` radians.
@@ -947,7 +964,7 @@ if ("serviceWorker" in navigator) {
 
 // Show a prompt after the user installs the app.
 // You can customize behavior here – this is just for debugging.
-window.addEventListener("appinstalled", event => {
+window.addEventListener("appinstalled", (event) => {
   console.log("App was installed:", event);
   alert("App was installed.");
 });
