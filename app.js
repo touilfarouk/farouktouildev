@@ -32,7 +32,7 @@ const pico8_buttons = [0, 0, 0, 0, 0, 0, 0, 0]; // Max 8 players.
 // When `pico8_audio_context` is defined globally, PICO-8 will manipulate the
 // AudioContext referenced by `pico8_audio_context`, instead of creating one of
 // its own.
-//let pico8_audio_context = null;
+let pico8_audio_context = null;
 
 // PICO-8's JavaScript looks at `Module.canvas` to access the <canvas> element.
 // We initialize `Module.canvas` before loading PICO-8's JavaScript, see the
@@ -317,7 +317,6 @@ function GameShell({ canvasIdentifier }) {
         <PlayButton
           style={{ position: "absolute" }}
           onClick={() => {
-            playAudio();
             // Set up audio. Must call this inside a click handler for iOS audio to work.
             createAudioContext();
 
@@ -330,13 +329,6 @@ function GameShell({ canvasIdentifier }) {
     </div>
   );
 }
-const audio = new Audio("music.wav");
-const playAudio = () => {
-  audio.play();
-};
-audio.addEventListener("error", () => {
-  console.error("Error loading audio");
-});
 
 // <PlayButton /> displays the standard PICO-8 play button.
 function PlayButton({ style, onClick, isPortrait }) {
@@ -890,17 +882,17 @@ function createAudioContext() {
     window.msAudioContext;
 
   // Create context object.
-  //pico8_audio_context = new AudioContext();
+  pico8_audio_context = new AudioContext();
   const source = pico8_audio_context.createBufferSource();
   source.buffer = pico8_audio_context.createBuffer(1, 1, 22050);
   source.connect(pico8_audio_context.destination);
 
   // Wake up audio on iOS.
-  //if (source.noteOn) {
-  //source.noteOn(0);
-  //} else {
-  //source.start(0);
-  //}
+  if (source.noteOn) {
+    source.noteOn(0);
+  } else {
+    source.start(0);
+  }
 }
 
 // rotate a 2D vector by `angle` radians.
