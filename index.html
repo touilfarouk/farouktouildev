@@ -2,23 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <!-- May need "user-scalable=no". -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Metadata for iOS. -->
+    <!-- Metadata for iOS and mobile devices. -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Weather PWA" />
     <link rel="apple-touch-icon" href="/images/icon_152x152.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- Additional metadata to satisfy Lighthouse audit. -->
     <meta name="description" content="This is an awesome PICO-8 game." />
     <meta name="theme-color" content="#2F3BA2" />
 
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/fullscreen-polyfill@1.1.0/dist/fullscreen.polyfill.min.js"></script>
     <link rel="stylesheet" href="./app.css" />
     <link rel="manifest" href="./manifest.json" />
   </head>
@@ -32,30 +30,28 @@
     <script>
       const fullscreenButton = document.getElementById("fullscreenButton");
 
-      // Feature detect
-      const fullscreenEnabled =
-        document.fullscreenEnabled || document.webkitFullscreenEnabled;
+      fullscreenButton.addEventListener("click", () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch((err) => {
+            console.error(`Error exiting fullscreen mode: ${err.message}`);
+          });
+        } else {
+          document.documentElement.requestFullscreen().catch((err) => {
+            console.error(`Error entering fullscreen mode: ${err.message}`);
+          });
+        }
+      });
 
-      if (fullscreenEnabled) {
-        fullscreenButton.addEventListener("click", () => {
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          } else {
-            document.body.requestFullscreen().catch((err) => {
-              alert(
-                `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
-              );
-            });
-          }
-        });
-      } else {
-        fullscreenButton.style.display = "none";
-      }
-
-      // iOS fullscreen on launch
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        document.documentElement.classList.add("mobile");
-      }
+      // Detect and handle changes to fullscreen mode
+      document.addEventListener("fullscreenchange", () => {
+        if (document.fullscreenElement) {
+          // We are in fullscreen mode
+          // You can add any additional logic here
+        } else {
+          // We exited fullscreen mode
+          // You can add any additional logic here
+        }
+      });
     </script>
     <!-- React. -->
     <script
