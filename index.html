@@ -27,57 +27,7 @@
       style="position: absolute; visibility: hidden; width: 0; height: 0"
     ></canvas>
     <button id="fullscreenButton">Fullscreen</button>
-    <script>
-      const fullscreenButton = document.getElementById("fullscreenButton");
-
-      fullscreenButton.addEventListener("click", () => {
-        if (document.fullscreenElement) {
-          document.exitFullscreen().catch((err) => {
-            console.error(`Error exiting fullscreen mode: ${err.message}`);
-          });
-        } else {
-          document.documentElement.requestFullscreen().catch((err) => {
-            console.error(`Error entering fullscreen mode: ${err.message}`);
-          });
-        }
-      });
-
-      // Detect and handle changes to fullscreen mode
-      document.addEventListener("fullscreenchange", () => {
-        if (document.fullscreenElement) {
-          // We are in fullscreen mode
-          // You can add any additional logic here
-        } else {
-          // We exited fullscreen mode
-          // You can add any additional logic here
-        }
-      });
-    </script>
-    <!-- React. -->
-    <script
-      src="https://unpkg.com/react@16/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
-      crossorigin
-    ></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-    <!-- Your app. -->
-    <script type="text/babel" src="./app.js"></script>
-
-    <!-- Catches arrow key events to avoid scrolling the browser page -->
-    <script>
-      window.addEventListener(
-        "keydown",
-        function (e) {
-          if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-            e.preventDefault();
-          }
-        },
-        false
-      );
-    </script>
+    <!-- Include your JavaScript in an external file -->
+    <script src="./script.js"></script>
   </body>
 </html>
