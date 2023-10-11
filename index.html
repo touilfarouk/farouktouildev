@@ -32,38 +32,25 @@
     <script>
       const fullscreenButton = document.getElementById("fullscreenButton");
 
-      // Feature detect
+      // Check if the user is on a mobile device
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+      // Feature detect for fullscreen
       const fullscreenEnabled =
         document.fullscreenEnabled || document.webkitFullscreenEnabled;
 
-      if (fullscreenEnabled) {
-        fullscreenButton.addEventListener("click", () => {
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          } else {
-            document.body.requestFullscreen().catch((err) => {
-              alert(
-                `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
-              );
-            });
-          }
+      if (isMobile && fullscreenEnabled) {
+        // Automatically enter fullscreen mode on mobile devices
+        document.body.requestFullscreen().catch((err) => {
+          alert(
+            `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`
+          );
         });
       } else {
         fullscreenButton.style.display = "none";
-      }
-
-      // Request fullscreen mode on page load
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.requestFullscreen().catch((err) => {
-          alert(
-            `Error attempting to enable fullscreen mode on page load: ${err.message} (${err.name})`
-          );
-        });
-      });
-
-      // iOS fullscreen on launch
-      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        document.documentElement.classList.add("mobile");
       }
     </script>
     <!-- React. -->
