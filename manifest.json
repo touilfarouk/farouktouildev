@@ -37,8 +37,19 @@
     }
   ],
   "orientation": "portrait-primary",
-  "theme_color": "#c64817",
-  "background_color": "#c64817",
+  "theme_color": "rgba(198, 72, 23, 0.5)",
+  "background_color": "rgba(198, 72, 23, 0.5)",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "crossorigin": "use-credentials",
+  "serviceworker": {
+    "src": "/sw.js",
+    "scope": "/",
+    "type": "classic"
+  }
 }
